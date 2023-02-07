@@ -226,14 +226,3 @@ class _SoundplayNowPlayingViewState
     );
   }
 }
-
-class CounterText extends StatelessWidget {
-  const CounterText({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final count = context.select((CounterCubit cubit) => cubit.state);
-    return Text('$count', style: theme.textTheme.headlineLarge);
-  }
-}
