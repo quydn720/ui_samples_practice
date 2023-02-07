@@ -7,6 +7,56 @@ class SoundplayHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+class FeaturedAlbumsList extends StatelessWidget {
+  const FeaturedAlbumsList({super.key, required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              const SizedBox(height: 8),
+              SizedBox(
+                height: width / 3 + 45,
+                child: ListView.separated(
+                  itemCount: 5,
+                  scrollDirection: Axis.horizontal,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: 8),
+                  itemBuilder: (context, index) {
+                    return AlbumsTile(
+                      track: Track(
+                        artistName: 'NCT, NCT 127',
+                        name: 'Hold It In',
+                        imageUrl:
+                            'https://static.wikia.nocookie.net/treasuremaker/images/6/64/THE_FIRST_STEP_-_TREASURE_EFFECT_digital_album_cover.jpg/revision/latest/scale-to-width-down/1000?cb=20210111130209',
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+}
+
 class FeaturedArtists extends StatelessWidget {
   const FeaturedArtists({super.key, required this.title});
 
