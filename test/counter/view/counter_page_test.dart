@@ -17,6 +17,19 @@ void main() {
       expect(find.byType(CounterView), findsOneWidget);
     });
   });
+  group('FeaturedPage', () {
+    testWidgets('renders Featured', (tester) async {
+      await tester.pumpApp(const Featured());
+      expect(find.byType(Featured), findsOneWidget);
+      await tester.tap(find.byType(TextButton));
+    });
+  });
+  group('EstateCarouselPage', () {
+    testWidgets('renders EstateCarouselView', (tester) async {
+      await tester.pumpApp(const EstateCarousel());
+      expect(find.byType(EstateCarousel), findsOneWidget);
+    });
+  });
 
   group('CounterView', () {
     late CounterCubit counterCubit;
