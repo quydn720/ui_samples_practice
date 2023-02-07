@@ -88,6 +88,38 @@ class AlbumsTile extends StatelessWidget {
     );
   }
 }
+
+class _Categories extends StatelessWidget {
+  const _Categories();
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 40,
+      child: Center(
+        child: ListView.builder(
+          itemCount: categories.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (_, index) => Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: Chip(
+              elevation: 0,
+              side: BorderSide.none,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              label: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Text(categories[index]),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
     );
   }
 }
