@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:ui_samples_practice/l10n/l10n.dart';
 import 'package:ui_samples_practice/sound_play/sound_play.dart';
 
@@ -18,6 +19,35 @@ class App extends StatelessWidget {
     );
   }
 }
+
+final audioPlayerProvider = Provider.autoDispose(
+  (ref) {
+    final audioPlayer = AudioPlayer();
+    audioPlayer
+        .setAudioSource(
+      ConcatenatingAudioSource(
+        children: [
+          AudioSource.uri(
+            Uri.parse(
+              'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/72/a3/ab/72a3ab79-0066-f773-6618-7a53adc250b3/mzaf_17921540907592750976.plus.aac.p.m4a',
+            ),
+          ),
+          AudioSource.uri(
+            Uri.parse(
+              'https://archive.org/download/IGM-V7/IGM%20-%20Vol.%207/25%20Diablo%20-%20Tristram%20%28Blizzard%29.mp3',
+            ),
+          ),
+        ],
+      ),
+    )
+        .catchError((dynamic error) {
+      debugPrint('An error occured $error');
+      return null;
+    });
+
+    return audioPlayer;
+  },
+);
 
 class SoundplayApp extends StatefulWidget {
   const SoundplayApp({super.key});
