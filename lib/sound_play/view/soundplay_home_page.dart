@@ -172,6 +172,20 @@ class AlbumsTile extends StatelessWidget {
   }
 }
 
+class Track {
+  Track({
+    required this.artistName,
+    required this.name,
+    required this.imageUrl,
+  });
+
+  final String artistName;
+
+  final String name;
+
+  final String imageUrl;
+}
+
 class _Categories extends StatelessWidget {
   const _Categories();
 
@@ -227,11 +241,11 @@ class _GreetingWidget extends StatelessWidget {
   }
 }
 
-class NowPlayingWidget extends StatelessWidget {
+class NowPlayingWidget extends ConsumerWidget {
   const NowPlayingWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       decoration: BoxDecoration(
@@ -278,7 +292,7 @@ class NowPlayingWidget extends StatelessWidget {
   }
 }
 
-const categories = ['Music', 'Podcast', 'Event', 'Artist'];
+const categories = ['Music', 'Podcast', 'Event', 'Artist', 'Artist', 'Artist'];
 const featureds = [
   {'name': '2 Babbies', 'artists': 'NCT, NCT 127'},
   {'name': 'Hold It In', 'artists': 'Treasure'},
