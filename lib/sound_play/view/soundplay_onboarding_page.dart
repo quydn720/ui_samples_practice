@@ -13,8 +13,8 @@ class SoundplayOnboardingPage extends StatelessWidget {
         top: false,
         child: Stack(
           children: [
-            Container(
-              decoration: const BoxDecoration(
+            const DecoratedBox(
+              decoration: BoxDecoration(
                 image: DecorationImage(
                   alignment: Alignment(0.55, 0.1),
                   fit: BoxFit.none,
