@@ -7,6 +7,39 @@ class SoundplayHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: const [
+                  _GreetingWidget(),
+                  SizedBox(height: 16),
+                  _Categories(),
+                  SizedBox(height: 16),
+                  FeaturedAlbumsList(title: 'Recent Playing'),
+                  FeaturedArtists(title: 'Artists'),
+                  FeaturedAlbumsList(title: 'Popular Today'),
+                  FeaturedAlbumsList(title: 'Recommended for you'),
+                  SizedBox(height: 80),
+                ],
+              ),
+            ),
+            const Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 8),
+                child: NowPlayingWidget(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class FeaturedAlbumsList extends StatelessWidget {
   const FeaturedAlbumsList({super.key, required this.title});
