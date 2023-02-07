@@ -201,7 +201,25 @@ class _SoundplayNowPlayingViewState
               ),
             ),
             const SizedBox(height: 16),
-            Slider(value: 0.75, onChanged: (v) {}),
+            StreamBuilder(
+              stream: audioPlayer.volumeStream,
+              builder: (_, snap) {
+                return Slider(
+                  value: snap.data ?? 0 / 1,
+                  onChanged: audioPlayer.setVolume,
+                );
+              },
+            ),
+            StreamBuilder(
+              stream: audioPlayer.positionStream,
+              builder: (_, snap) {
+                return Slider(
+                  value: (snap.data?.inMilliseconds ?? 0) /
+                      (audioPlayer.duration?.inMilliseconds ?? 1),
+                  onChanged: null,
+                );
+              },
+            ),
           ],
         ),
       ),
