@@ -16,7 +16,7 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^2.1.3
   font_awesome_flutter: ^10.3.0
-  google_fonts: ^4.0.1
+  google_fonts: ^4.0.3
   intl: ^0.17.0
   just_audio: ^0.9.31
   widgetbook: ^2.0.5-beta
