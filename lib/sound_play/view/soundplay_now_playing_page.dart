@@ -1,9 +1,14 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:ui_samples_practice/app/view/app.dart';
 import 'package:ui_samples_practice/counter/counter.dart';
+
+// ignore: constant_identifier_names
+const SEEK_DURATION_IN_SECOND = 15;
 
 class SoundplayNowPlayingPage extends StatelessWidget {
   const SoundplayNowPlayingPage({super.key});
@@ -55,6 +60,8 @@ class _SoundplayNowPlayingViewState
   bool isPlaying = false;
   @override
   Widget build(BuildContext context) {
+    final audioPlayer = ref.watch(audioPlayerProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -136,11 +143,31 @@ class _SoundplayNowPlayingViewState
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          const FaIcon(FontAwesomeIcons.backwardStep),
-                          const FaIcon(FontAwesomeIcons.rotateLeft),
+                          IconButton(
+                            onPressed: audioPlayer.hasPrevious
+                                ? audioPlayer.seekToPrevious
+                                : null,
+                            icon: const FaIcon(FontAwesomeIcons.backwardStep),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              audioPlayer.seek(
+                                Duration(
+                                  seconds: audioPlayer.position.inSeconds -
+                                      SEEK_DURATION_IN_SECOND,
+                                ),
+                              );
+                            },
+                            icon: const FaIcon(FontAwesomeIcons.rotateLeft),
+                          ),
                           IconButton(
                             onPressed: () {
                               setState(() => isPlaying = !isPlaying);
+                              if (audioPlayer.playing == true) {
+                                audioPlayer.pause();
+                              } else {
+                                audioPlayer.play();
+                              }
                             },
                             icon: FaIcon(
                               isPlaying
@@ -149,8 +176,23 @@ class _SoundplayNowPlayingViewState
                               size: 64,
                             ),
                           ),
-                          const FaIcon(FontAwesomeIcons.rotateRight),
-                          const FaIcon(FontAwesomeIcons.forwardStep),
+                          IconButton(
+                            onPressed: () {
+                              audioPlayer.seek(
+                                Duration(
+                                  seconds: audioPlayer.position.inSeconds +
+                                      SEEK_DURATION_IN_SECOND,
+                                ),
+                              );
+                            },
+                            icon: const FaIcon(FontAwesomeIcons.rotateRight),
+                          ),
+                          IconButton(
+                            onPressed: audioPlayer.hasNext
+                                ? audioPlayer.seekToNext
+                                : null,
+                            icon: const FaIcon(FontAwesomeIcons.forwardStep),
+                          ),
                         ],
                       ),
                     ),
