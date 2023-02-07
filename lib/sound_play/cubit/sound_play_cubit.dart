@@ -1,8 +1,19 @@
 import 'package:bloc/bloc.dart';
+import 'package:just_audio/just_audio.dart';
 
-class CounterCubit extends Cubit<int> {
-  CounterCubit() : super(0);
+class SoundplayNowPlaying extends Cubit<double> {
+  SoundplayNowPlaying(this._audioPlayer) : super(0);
 
-  void increment() => emit(state + 1);
-  void decrement() => emit(state - 1);
+  final AudioPlayer _audioPlayer;
+
+  void play() {
+    _audioPlayer.play();
+    emit(state + 1);
+  }
+
+  void pause() => emit(state - 1);
+
+  void forward() {
+    emit(state - 1);
+  }
 }
