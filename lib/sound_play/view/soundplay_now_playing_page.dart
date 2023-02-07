@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:ui_samples_practice/counter/counter.dart';
@@ -38,67 +39,20 @@ class Music {
   final String artist;
 }
 
-class SoundplayNowPlayingView extends StatefulWidget {
+class SoundplayNowPlayingView extends ConsumerStatefulWidget {
   const SoundplayNowPlayingView({super.key, required this.music});
 
   final Music music;
 
   @override
-  State<SoundplayNowPlayingView> createState() =>
+  ConsumerState<ConsumerStatefulWidget> createState() =>
       _SoundplayNowPlayingViewState();
 }
 
-class _SoundplayNowPlayingViewState extends State<SoundplayNowPlayingView> {
+class _SoundplayNowPlayingViewState
+    extends ConsumerState<SoundplayNowPlayingView> {
   bool liked = false;
   bool isPlaying = false;
-  late AudioPlayer _audioPlayer;
-
-  @override
-  void initState() {
-    super.initState();
-    _audioPlayer = AudioPlayer();
-
-    // Set a sequence of audio sources that will be played by the audio player.
-    _audioPlayer
-        .setAudioSource(
-      ConcatenatingAudioSource(
-        children: [
-          AudioSource.uri(
-            Uri.parse(
-              'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/72/a3/ab/72a3ab79-0066-f773-6618-7a53adc250b3/mzaf_17921540907592750976.plus.aac.p.m4a',
-            ),
-          ),
-          AudioSource.uri(
-            Uri.parse(
-              'https://archive.org/download/IGM-V7/IGM%20-%20Vol.%207/25%20Diablo%20-%20Tristram%20%28Blizzard%29.mp3',
-            ),
-          ),
-          AudioSource.uri(
-            Uri.parse(
-              'https://archive.org/download/igm-v8_202101/IGM%20-%20Vol.%208/15%20Pokemon%20Red%20-%20Cerulean%20City%20%28Game%20Freak%29.mp3',
-            ),
-          ),
-          AudioSource.uri(
-            Uri.parse(
-              'https://scummbar.com/mi2/MI1-CD/01%20-%20Opening%20Themes%20-%20Introduction.mp3',
-            ),
-          ),
-        ],
-      ),
-    )
-        .catchError((dynamic error) {
-      // catch load errors: 404, invalid url ...
-      debugPrint('An error occured $error');
-      return null;
-    });
-  }
-
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
