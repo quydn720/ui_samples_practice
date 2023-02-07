@@ -51,71 +51,43 @@ class FeaturedArtists extends StatelessWidget {
   }
 }
 
+class AlbumsTile extends StatelessWidget {
+  const AlbumsTile({super.key, required this.track});
+  final Track track;
 
-                        //     children: [
-                        //       Container(
-                        //         height: 50,
-                        //         width: 50,
-                        //         decoration: const BoxDecoration(
-                        //           shape: BoxShape.circle,
-                        //           color: Colors.green,
-                        //         ),
-                        //       ),
-                        //       const SizedBox(height: 4),
-                        //       Text(
-                        //         featureds[index]['artists']!,
-                        //         overflow: TextOverflow.ellipsis,
-                        //       ),
-                        //     ],
-                        //   ),
-                        // );
-                        // },
-                      ),
-                    ),
-                    const Text('Artist'),
-                    const SizedBox(height: 8),
-                    SizedBox(
-                      height: 240,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        separatorBuilder: (_, __) => const SizedBox(width: 8),
-                        itemCount: featureds.length,
-                        shrinkWrap: true,
-                        itemBuilder: (ctx, index) {
-                          return SizedBox(
-                            width: 80,
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 50,
-                                  width: 50,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.green,
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  featureds[index]['artists']!,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Align(
-                alignment: Alignment.bottomCenter,
-                child: NowPlayingWidget(),
-              ),
-            ],
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
+    final txtStyle = Theme.of(context).textTheme.labelLarge;
+
+    return SizedBox(
+      width: width / 3,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.network(track.imageUrl),
           ),
-        ),
+          const SizedBox(height: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                track.name,
+                overflow: TextOverflow.ellipsis,
+                style: txtStyle?.copyWith(fontWeight: FontWeight.w600),
+              ),
+              Text(track.artistName, style: txtStyle),
+            ],
+          )
+        ],
       ),
+    );
+  }
+}
     );
   }
 }
