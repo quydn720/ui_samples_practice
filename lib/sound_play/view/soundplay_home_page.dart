@@ -120,6 +120,26 @@ class _Categories extends StatelessWidget {
   }
 }
 
+class _GreetingWidget extends StatelessWidget {
+  const _GreetingWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    final style = Theme.of(context).textTheme.headlineSmall?.copyWith(
+          fontWeight: FontWeight.w600,
+        );
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Good morning', style: style),
+            Text('Have a nice day!', style: style),
+          ],
+        ),
+        const Spacer(),
+        const FaIcon(FontAwesomeIcons.bell),
+      ],
     );
   }
 }
