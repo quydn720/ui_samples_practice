@@ -46,6 +46,7 @@ class FeaturedAlbumsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final titleStyle = Theme.of(context).textTheme.headlineSmall;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -54,25 +55,24 @@ class FeaturedAlbumsList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
+              Text(title, style: titleStyle),
               const SizedBox(height: 8),
               SizedBox(
                 height: width / 3 + 45,
                 child: ListView.separated(
-                  itemCount: 5,
+                  itemCount: featureds.length,
                   scrollDirection: Axis.horizontal,
                   separatorBuilder: (context, index) =>
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 12),
                   itemBuilder: (context, index) {
+                    featureds.shuffle();
+
                     return AlbumsTile(
+                      key: ObjectKey(featureds[index]),
                       track: Track(
-                        artistName: 'NCT, NCT 127',
-                        name: 'Hold It In',
-                        imageUrl:
-                            'https://static.wikia.nocookie.net/treasuremaker/images/6/64/THE_FIRST_STEP_-_TREASURE_EFFECT_digital_album_cover.jpg/revision/latest/scale-to-width-down/1000?cb=20210111130209',
+                        name: featureds[index]['name']!,
+                        artistName: featureds[index]['artist']!,
+                        imageUrl: featureds[index]['image']!,
                       ),
                     );
                   },
@@ -108,15 +108,20 @@ class FeaturedArtists extends StatelessWidget {
               SizedBox(
                 height: width / 3 - 30,
                 child: ListView.separated(
-                  itemCount: 5,
+                  itemCount: artists.length,
                   scrollDirection: Axis.horizontal,
                   separatorBuilder: (_, __) => const SizedBox(width: 16),
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        CircleAvatar(radius: width / 10),
+                        CircleAvatar(
+                          radius: width / 10,
+                          backgroundImage: AssetImage(
+                            artists[index]['image']!,
+                          ),
+                        ),
                         const SizedBox(height: 8),
-                        const Text('Justin Bieber'),
+                        Text(artists[index]['name']!),
                       ],
                     );
                   },
