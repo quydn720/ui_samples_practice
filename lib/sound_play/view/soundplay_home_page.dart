@@ -18,10 +18,15 @@ class SoundplayHomePage extends StatelessWidget {
                   _GreetingWidget(),
                   SizedBox(height: 16),
                   _Categories(),
-                  SizedBox(height: 16),
+                  SizedBox(height: 8),
+                  Divider(),
+                  SizedBox(height: 8),
                   FeaturedAlbumsList(title: 'Recent Playing'),
+                  Divider(),
                   FeaturedArtists(title: 'Artists'),
+                  Divider(),
                   FeaturedAlbumsList(title: 'Popular Today'),
+                  Divider(),
                   FeaturedAlbumsList(title: 'Recommended for you'),
                 ],
               ),
@@ -142,9 +147,11 @@ class AlbumsTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.network(track.imageUrl),
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(track.imageUrl, fit: BoxFit.cover),
+            ),
           ),
           const SizedBox(height: 8),
           Column(
