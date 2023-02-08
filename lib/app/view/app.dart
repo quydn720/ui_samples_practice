@@ -93,16 +93,32 @@ class _SoundplayAppState extends State<SoundplayApp> {
           ),
         ],
       ),
-      body: IndexedStack(
-        index: index,
-        children: const [
-          SoundplayHomePage(),
-          SoundplayNowPlayingPage(),
-          Placeholder(),
-          Placeholder(),
+      body: Column(
+        children: [
+          Expanded(
+            child: IndexedStack(
+              index: index,
+              children: const [
+                SoundplayHomePage(),
+                SoundplayNowPlayingPage(),
+                Placeholder(),
+                SoundplayProfilePage(),
+              ],
+            ),
+          ),
+          const NowPlayingWidget(),
         ],
       ),
     );
+  }
+}
+
+class SoundplayProfilePage extends StatelessWidget {
+  const SoundplayProfilePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
 

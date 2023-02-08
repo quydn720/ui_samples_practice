@@ -23,15 +23,7 @@ class SoundplayHomePage extends StatelessWidget {
                   FeaturedArtists(title: 'Artists'),
                   FeaturedAlbumsList(title: 'Popular Today'),
                   FeaturedAlbumsList(title: 'Recommended for you'),
-                  SizedBox(height: 80),
                 ],
-              ),
-            ),
-            const Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.only(bottom: 8),
-                child: NowPlayingWidget(),
               ),
             ),
           ],
@@ -246,15 +238,10 @@ class NowPlayingWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-      decoration: BoxDecoration(
-        boxShadow: const [BoxShadow(blurRadius: 20)],
-        borderRadius: BorderRadius.circular(8),
-        color: const Color.fromRGBO(6, 7, 37, 1),
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             children: [
@@ -283,6 +270,7 @@ class NowPlayingWidget extends ConsumerWidget {
             borderRadius: BorderRadius.circular(8),
             child: const LinearProgressIndicator(
               value: 0.7,
+              minHeight: 2,
               color: Colors.white,
             ),
           ),
