@@ -281,9 +281,38 @@ class NowPlayingWidget extends ConsumerWidget {
 }
 
 const categories = ['Music', 'Podcast', 'Event', 'Artist', 'Artist', 'Artist'];
-const featureds = [
-  {'name': '2 Babbies', 'artists': 'NCT, NCT 127'},
-  {'name': 'Hold It In', 'artists': 'Treasure'},
-  {'name': "Don't Let Me Down", 'artists': 'The Beatles'},
-  {'name': 'Hay Trao Cho Anh', 'artists': 'Son Tung M-TP'},
+final featureds = [
+  {
+    'name': 'CHARLIE',
+    'artist': 'Charlie Puth',
+    'image': 'assets/images/album_charlie.jpeg',
+  },
+  {
+    'name': 'Favorite',
+    'artist': 'NCT 127',
+    'image': 'assets/images/album_favorite.jpeg',
+  },
+  {
+    'name': 'Indigo',
+    'artist': 'RM',
+    'image': 'assets/images/album_indigo.png',
+  },
+  {
+    'name': 'Tomorrow',
+    'artist': 'Chanyeol',
+    'image': 'assets/images/album_tomorrow.jpeg',
+  },
+  {
+    'name': 'Wonder',
+    'artist': 'Shawn Mendes',
+    'image': 'assets/images/album_wonder.png',
+  },
+];
+
+const artists = [
+  {'name': 'Justin Bieber', 'image': 'assets/images/artist_justin_bieber.jpeg'},
+  {'name': 'Bigbang', 'image': 'assets/images/artist_bigbang.jpeg'},
+  {'name': 'NewJeans', 'image': 'assets/images/artist_newjeans.jpeg'},
+  {'name': 'Taylor Swift', 'image': 'assets/images/artist_taylor_swift.jpeg'},
+  {'name': 'Da LAB', 'image': 'assets/images/artist_dalab.jpeg'},
 ];
