@@ -148,8 +148,26 @@ class HabiticaHome extends StatelessWidget {
   }
 }
 
-class _RecentTasks extends StatelessWidget {
-  const _RecentTasks();
+class RecentTasks extends StatefulWidget {
+  const RecentTasks({super.key});
+
+  @override
+  State<RecentTasks> createState() => _RecentTasksState();
+}
+
+class _RecentTasksState extends State<RecentTasks> {
+  final scrollController = ScrollController();
+  double currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {
+      var d = scrollController.offset / 344.0;
+      if (d < 0) d = 0;
+      setState(() => currentIndex = d);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -161,6 +179,7 @@ class _RecentTasks extends StatelessWidget {
         Text('Recent Tasks', style: textTheme.titleLarge),
         const SizedBox(height: 12),
         SingleChildScrollView(
+          controller: scrollController,
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
@@ -201,6 +220,24 @@ class _RecentTasks extends StatelessWidget {
                 time: '5 weeks',
               ),
             ],
+          ),
+        ),
+        Center(
+          child: DotsIndicator(
+            dotsCount: 4,
+            position: currentIndex,
+            decorator: DotsDecorator(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              activeSize: const Size(20, 10),
+              activeColor: const Color.fromRGBO(34, 37, 96, 1),
+              size: const Size(10, 10),
+              activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              spacing: const EdgeInsets.only(right: 4),
+            ),
           ),
         ),
       ],
