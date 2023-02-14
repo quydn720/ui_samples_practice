@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ui_samples_practice/extensions.dart';
 import 'package:ui_samples_practice/habitica/data/models/priority.dart';
+import 'package:ui_samples_practice/habitica/mocks.dart';
+import 'package:ui_samples_practice/habitica/presentation/widgets/avatar_stacked.dart';
 
 class TaskCard extends StatelessWidget {
   const TaskCard({
@@ -41,8 +43,8 @@ class TaskCard extends StatelessWidget {
 
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      margin: const EdgeInsets.only(right: 12, bottom: 8),
-      elevation: 6,
+      margin: const EdgeInsets.only(right: 12, bottom: 24),
+      elevation: 10,
       shadowColor: cardColor,
       color: cardColor,
       child: Container(
@@ -120,63 +122,3 @@ class TaskCard extends StatelessWidget {
     );
   }
 }
-
-class AvatarStacked extends StatelessWidget {
-  const AvatarStacked({
-    super.key,
-    required this.avatars,
-    this.avatarRadius,
-  });
-
-  static const maxLength = 4;
-  static const cutPortion = 0.75;
-
-  final List<String> avatars;
-  final double? avatarRadius;
-
-  @override
-  Widget build(BuildContext context) {
-    final diameter = (avatarRadius ?? 20) * 2;
-    final left = cutPortion * diameter;
-
-    return SizedBox(
-      height: 36,
-      child: Stack(
-        children: [
-          ...List.generate(
-            4,
-            (index) {
-              if (index == 3) {
-                return Positioned(
-                  left: left * index,
-                  child: CircleAvatar(
-                    radius: avatarRadius,
-                    backgroundColor: Colors.black,
-                    child: Text(
-                      '+${avatars.length - 3}',
-                      style: const TextStyle(color: Colors.white, fontSize: 13),
-                    ),
-                  ),
-                );
-              }
-              return Positioned(
-                left: left * index,
-                child: CircleAvatar(
-                  backgroundImage: AssetImage(avatars[index]),
-                  radius: avatarRadius,
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-const mockAvatars = <String>[
-  'assets/images/habitica/avatar-1.jpeg',
-  'assets/images/habitica/avatar-2.jpeg',
-  'assets/images/habitica/avatar-3.jpeg',
-  'assets/images/habitica/avatar-4.jpeg',
-];
