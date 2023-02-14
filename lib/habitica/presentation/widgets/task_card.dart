@@ -21,7 +21,6 @@ class TaskCard extends StatelessWidget {
   final double progressValue;
   final String conversations;
   final String attachments;
-  // Should not be > 10 weeks
   final String time;
 
   @override
@@ -40,17 +39,15 @@ class TaskCard extends StatelessWidget {
       fontWeight: FontWeight.w600,
     );
 
-    return Container(
-      decoration: BoxDecoration(
-        color: cardColor,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      margin: const EdgeInsets.only(right: 12),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      width: size.width * 0.8,
-      child: Card(
-        color: cardColor,
-        elevation: 0,
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      margin: const EdgeInsets.only(right: 12, bottom: 8),
+      elevation: 6,
+      shadowColor: cardColor,
+      color: cardColor,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        width: size.width * 0.8,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
