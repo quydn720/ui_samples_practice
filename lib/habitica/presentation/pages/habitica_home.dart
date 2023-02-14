@@ -1,6 +1,8 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ui_samples_practice/habitica/data/models/priority.dart';
+import 'package:ui_samples_practice/habitica/mocks.dart';
 import 'package:ui_samples_practice/habitica/presentation/widgets/task_card.dart';
 
 class HabiticaHome extends StatelessWidget {
@@ -11,10 +13,8 @@ class HabiticaHome extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      // backgroundColor: Colors.grey.shade200,
-      backgroundColor: Colors.grey.shade400,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -23,8 +23,10 @@ class HabiticaHome extends StatelessWidget {
               children: [
                 const _ProfileTile(),
                 const SizedBox(height: 8),
-                const _RecentTasks(),
+                const RecentTasks(),
+                const SizedBox(height: 16),
                 Text('Ongoing Tasks', style: textTheme.titleLarge),
+                const SizedBox(height: 16),
                 SizedBox(
                   height: 200,
                   child: ListView.builder(
@@ -255,7 +257,10 @@ class _ProfileTile extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       minVerticalPadding: 0,
-      leading: const CircleAvatar(radius: 30),
+      leading: CircleAvatar(
+        radius: 30,
+        backgroundImage: AssetImage(mockAvatars[0]),
+      ),
       title: Text('Murad Zaman', style: textTheme.titleLarge),
       subtitle: const Text("You've 5 tasks today"),
       trailing: const Icon(FontAwesomeIcons.bell),
